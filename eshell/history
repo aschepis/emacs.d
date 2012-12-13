@@ -1,0 +1,30 @@
+ls
+rm 20121107164018_admin_customers_remove_shipping_columns.rb\~
+ls
+cd ..
+cd ..
+bundle exec rake db:migrate
+rails console
+rails console
+cd ../../../
+cd .
+cd ..
+rails g migration add_meal_pattern_columns
+git stash
+git status
+git add db/migrate/
+git stash
+git checkout -b staging
+git stash apply
+cd ../../
+./start-server.sh --nodaemon
+ls
+mkdir lib
+bundle install
+bundle install
+rm lib/connection.rb\~
+rm lib/connection.rb 
+ls
+rm Gemfile~
+ls
+bundle install
