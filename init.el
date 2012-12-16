@@ -30,6 +30,9 @@
 (setq mweb-filename-extensions '("php" "htm" "html" "ctp" "phtml" "php4" "php5" "html.erb" "js.erb" "css.erb" "erb"))
 (multi-web-global-mode 1)
 
+;; dont add magic encoding for ruby
+(setq ruby-insert-encoding-magic-comment nil)
+
 ;; tramp mode config
 (setq tramp-default-method "ssh")
 
