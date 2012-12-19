@@ -3,6 +3,10 @@
 (add-to-list 'load-path "~/.emacs.d/color-theme") 
 (add-to-list 'load-path "~/.emacs.d/color-theme/themes") 
 (add-to-list 'load-path "~/.emacs.d/helm")
+(add-to-list 'load-path "~/.emacs.d/scala-mode")
+
+;; scala mode
+(require 'scala-mode)
 
 ;; Textmate mode
 (add-to-list 'load-path "~/.emacs.d/vendor/textmate.el")
