@@ -9,7 +9,7 @@
 (require 'scala-mode)
 
 ;; Textmate mode
-(add-to-list 'load-path "~/.emacs.d/vendor/textmate.el")
+(add-to-list 'load-path "~/.emacs.d/vendor/textmate")
 (require 'textmate)
 (textmate-mode)
 
