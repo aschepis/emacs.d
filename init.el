@@ -4,9 +4,25 @@
 (add-to-list 'load-path "~/.emacs.d/color-theme/themes") 
 (add-to-list 'load-path "~/.emacs.d/helm")
 (add-to-list 'load-path "~/.emacs.d/scala-mode")
+(add-to-list 'load-path "~/.emacs.d/vendor")
+
+(add-to-list 'load-path "/usr/local/share/gtags")
+(require 'gtags)
+(autoload 'gtags-mode "gtags" "" t)
 
 ;; scala mode
 (require 'scala-mode)
+(require 'protobuf-mode)
+(require 'ruby-block)
+(ruby-block-mode t)
+(setq ruby-block-highlight-toggle t)
+
+(defconst my-protobuf-style
+  '((c-basic-offset . 2)
+    (indent-tabs-mode . nil)))
+
+(add-hook 'protobuf-mode-hook
+	  (lambda () (c-add-style "my-style" my-protobuf-style t)))
 
 ;; Textmate mode
 (add-to-list 'load-path "~/.emacs.d/vendor/textmate")
@@ -31,7 +47,7 @@
                   (js-mode "<script +\\(type=\"text/javascript\"\\|language=\"javascript\"\\)[^>]*>" "</script>")
                   (css-mode "<style +type=\"text/css\"[^>]*>" "</style>")
 		  (ruby-mode "<%" "%>")))
-(setq mweb-filename-extensions '("php" "htm" "html" "ctp" "phtml" "php4" "php5" "html.erb" "js.erb" "css.erb" "erb"))
+(setq mweb-filename-extensions '("php" "htm" "html" "ctp" "phtml" "php4" "php5" "html.erb" "js.erb" "css.erb" "erb" "eco" "jst.eco"))
 (multi-web-global-mode 1)
 
 ;; dont add magic encoding for ruby
@@ -93,3 +109,41 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+
+;;; backup/autosave
+(defvar backup-dir (expand-file-name "~/.emacs.d/backup/"))
+(defvar autosave-dir (expand-file-name "~/.emacs.d/autosave/"))
+(setq backup-directory-alist (list (cons ".*" backup-dir)))
+(setq auto-save-list-file-prefix autosave-dir)
+(setq auto-save-file-name-transforms `((".*" ,autosave-dir t)))
+
+;; Bind keys
+(global-set-key (kbd "C-x C-g") 'rgrep)
+(global-set-key (kbd "C-c C-f") 'gtags-find-tag)
+
+;; scss-mode
+;; https://github.com/antonj/scss-mode
+(add-to-list 'load-path "~/.emacs.d/vendor/scss-mode")
+(autoload 'scss-mode "scss-mode")
+(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+
+;; whitespace
+(setq whitespace-action '(auto-cleanup)) ;; automatically clean up bad whitespace
+(setq whitespace-style '(trailing space-before-tab indentation empty space-after-tab)) ;; only show bad whitespace
+
+;; coffee-mode
+(require 'coffee-mode)
+(setq coffee-tab-width 2)
+
+(defun coffee-custom ()
+  "coffee-mode-hook"
+  (set (make-local-variable 'tab-width) 2))
+
+(add-hook 'coffee-mode-hook '(lambda () (coffee-custom)))
+
+;; move faster up/down page with C-n and C-p
+(global-set-key (kbd "C-n")
+    (lambda () (interactive) (next-line 10)))
+(global-set-key (kbd "C-p")
+    (lambda () (interactive) (previous-line 10)))
