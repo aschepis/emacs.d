@@ -1,0 +1,1 @@
+("~/src/springboard/springboard-retail/" "/ssh:advantage-production:/opt/jafco/advantage" "~/src/convo/anywhere-server/" "~/.emacs.d/" "~/src/advantage/jafco_advantage/" "~/src/convo/registration/" "~/src/springboard/ios/" "~/src/convo/anywhere-applet-osx/" "~/src/advantage/x12/")
